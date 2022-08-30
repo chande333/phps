@@ -6,3 +6,7 @@ Mostly used PHP generic functions
 
 ## savingImages.php
 * Downloads a list of images from an Array of URLs
+
+## sql_database.php
+* Read AND UPDATE database with sql
+
