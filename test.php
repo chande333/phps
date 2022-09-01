@@ -27,3 +27,4 @@ function tres(){
 }
 
 uno();
+dos();
