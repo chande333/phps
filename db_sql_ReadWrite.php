@@ -19,6 +19,10 @@ $call = json_decode(file_get_contents('php://input'));
 if ($call){    
     call_user_func($call->fn);
 }
+else{
+    echo "error in call";
+}
+
 
 
 function pingDB(){
