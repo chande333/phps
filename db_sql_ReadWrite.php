@@ -84,3 +84,28 @@ function readAllDBItems(){
 	$conn->close();
 }
 
+function getNextAvailableID(){
+    global $call;
+
+    $conn = new mysqli($GLOBALS['servername'], $GLOBALS['dbusername'], $GLOBALS['dbpassword'], $GLOBALS['database']);
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	}
+
+	
+	$sql = "SELECT MAX(id) as lastid
+    FROM $call->table";
+	
+    $result = $conn->query($sql);
+    $outArray = [];
+    $row = $result->fetch_assoc();
+
+    echo($row['lastid'] + 1);
+
+
+	
+	$conn->close();
+
+    
+}
