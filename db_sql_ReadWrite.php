@@ -84,6 +84,35 @@ function readAllDBItems(){
 	$conn->close();
 }
 
+
+function updateDB(){
+	global $call;
+
+    	$outArray = array();
+
+	$conn = new mysqli($GLOBALS['servername'], $GLOBALS['dbusername'], $GLOBALS['dbpassword'], $GLOBALS['database']);
+	
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	}
+	
+	$sql = "UPDATE ".$call->table." 
+   	SET name = '".$call->name."',
+        author = '".$call->author."',
+        type = '".$call->type."',
+        notes = '".urldecode($call->notes)."'
+        WHERE id = '".$call->id."'
+    ";
+	$result = $conn->query($sql);
+
+	
+	$conn->close();
+
+
+}
+
+
 function getNextAvailableID(){
     global $call;
 
