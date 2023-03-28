@@ -2,7 +2,7 @@
 
 $call = json_decode(file_get_contents('php://input')); // id , order, direction
 $servername = "localhost";
-$database  = "";
+$dbname  = "";
 $dbusername = "";
 $dbpassword = "";
 
@@ -10,7 +10,7 @@ function readSQLDBfromID(){
 
 	globals $call;
 	globals $servername;
-	globals $database;
+	globals $dbname;
 	globals $dbusername;
 	globals $dbpassword;
 	
@@ -26,7 +26,7 @@ function readSQLDBfromID(){
 	    $order = " ORDER BY ".$call->order." ".$call->direction;
 	}
 
-	$conn = new mysqli($servername, $dbusername, $dbpassword, $database);
+	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
