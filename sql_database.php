@@ -24,24 +24,25 @@ function ping(){
 
 
 function readSQLDBfromID(){
+    
+    global $call;
+	global $servername;
+	global $dbname;
+	global $dbusername;
+	global $dbpassword;
+    global $tableName;
 
-	globals $call;
-	globals $servername;
-	globals $dbname;
-	globals $dbusername;
-	globals $dbpassword;
-	
-	$outArray = array();
-	$where = "";
-	$order = "";
+    $outArray = array();
+    $where = "";
+    $order = "";
 
-	if (isset($call->id)){
-	    $where = " WHERE id = '".$call->id."' ";
-	}
+    if (isset($call->id)){
+        $where = " WHERE id = '".$call->id."' ";
+    }
 
-	if (isset($call->order)){
-	    $order = " ORDER BY ".$call->order." ".$call->direction;
-	}
+    if (isset($call->order)){
+        $order = " ORDER BY ".$call->order." ".$call->direction;
+    }
 
 	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
@@ -49,24 +50,25 @@ function readSQLDBfromID(){
 	    die("Connection failed: " . $conn->connect_error);
 	}
 	
-	$sql = "SELECT * FROM ".$call->table." ".$where.$order;
-	
+	$sql = "SELECT * FROM ".$tableName." ".$where.$order;
+    
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 
-	// output data of each row
-	while($response = $result->fetch_assoc()) {
+    // output data of each row
+    while($response = $result->fetch_assoc()) {
 
-	    array_unshift($outArray,$response);
-	    
-	}
+        array_unshift($outArray,$response);
+        
+    }
 	} else {
-		echo "0 results";
+
+    	echo "0 results";
+
 	}
 	
 	$conn->close();
 
-
-	echo json_encode($outArray);
+    echo json_encode($outArray);
 }
