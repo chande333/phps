@@ -24,34 +24,29 @@ function ping(){
 
 
 function readSQLDBfromID(){
-    
+
     global $call;
-	global $servername;
-	global $dbname;
-	global $dbusername;
-	global $dbpassword;
-    global $tableName;
 
     $outArray = array();
-    $where = "";
+    $query = "";
     $order = "";
 
-    if (isset($call->id)){
-        $where = " WHERE id = '".$call->id."' ";
+    if (isset($call->query)){
+        $query = " WHERE ".urldecode($call->query);
     }
 
     if (isset($call->order)){
-        $order = " ORDER BY ".$call->order." ".$call->direction;
+        $order = " ORDER BY ".urldecode($call->order)." ".urldecode($call->direction);
     }
 
-	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+	$conn = new mysqli($GLOBALS['servername'], $GLOBALS['$dbusername'], $GLOBALS['$dbpassword'], $GLOBALS['$dbname']);
 
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
 	
-	$sql = "SELECT * FROM ".$tableName." ".$where.$order;
-    
+	$sql = "SELECT * FROM ".$GLOBALS['tableName']." ".$query." ".$order;
+    echo $sql;
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
