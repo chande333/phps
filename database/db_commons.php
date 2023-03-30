@@ -19,3 +19,8 @@ else{
     echo "Error: fn not declared<br>";
     var_dump($call);
 }
+
+
+function ping(){
+    echo "pong DB";
+}
