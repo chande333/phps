@@ -12,7 +12,7 @@ function readSQLDBfromID(){
 	    die("Connection failed: " . $globconn->connect_error);
 	}
 	
-	$sql = "SELECT * FROM ".$GLOBALS['tableName']." ".$GLOBALS['itemID'].$GLOBALS['order'].$GLOBALS['direction'];
+	$sql = "SELECT * FROM ".$GLOBALS['tableName']."  WHERE id = ".$GLOBALS['itemID'].$GLOBALS['order'].$GLOBALS['direction'];
 
 	$result = $globconn->query($sql);
 
