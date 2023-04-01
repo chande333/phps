@@ -1,26 +1,18 @@
 <?php
 
-$call = json_decode(file_get_contents('php://input')); 
+function getLastId() {
+    global $globconn;
+   
+	$query = "SELECT MAX(id) as lastid
+    FROM ".$GLOBALS['tableName'];
+	$result = mysqli_query($globconn, $query);
 
-require_once "constants.php";
-//$servername = "localhost";
-//$dbname  = "";
-//$dbusername = "";
-//$dbpassword = "";
+   
+    $outArray = [];
+    $row = $result->fetch_assoc();
 
-
-if (isset($call->fn)){
-    call_user_func($call-> fn);
+    return ($row['lastid'] + 1);
 }
-else{
-    echo "Error: fn not declared<br>";
-    var_dump($call);
-}
-
-function ping(){
-    echo "pong DB";
-}
-
 
 
 function addSQLDBentry(){
