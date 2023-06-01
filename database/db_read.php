@@ -1,7 +1,40 @@
 <?php
 
+function readSQLDBfromQuery($inputQuery,$decodeOutput = false){
+
+	global $globconn;
+	$outArray = array();
+    $sql = $inputQuery;
+
+  
+	if ($globconn->connect_error) {
+		die("Connection failed: " . $globconn->connect_error);
+	}
+	
+	$result = $globconn->query($sql);
+
+
+	if ($result->num_rows > 0) {
+		while($response = $result->fetch_assoc()) {	
+			array_unshift($outArray,$response);		
+		}
+	} else {
+		return array();
+	}
+
+	if ($decodeOutput){
+        return $outArray;
+    }
+    else{
+        echo json_encode($outArray);
+    }
+
+}
+
+
 // Two functions 
 // READ from a specific ID and from a given query
+
 
 function readSQLDBfromID(){
 
@@ -31,7 +64,7 @@ function readSQLDBfromID(){
 
 
 
-function readSQLDBfromQuery(){
+function readSQLDBfromFilter(){
 
 	global $globconn;
 	$outArray = array();
