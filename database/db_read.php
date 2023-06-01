@@ -1,5 +1,14 @@
 <?php
 
+function test123(){
+    global $call;
+    $outArray = new stdClass();
+
+    $outArray->test1 = readSQLDBfromQuery($call->query,true);
+    echo json_encode($outArray);
+}
+
+
 function readSQLDBfromQuery($inputQuery,$decodeOutput = false){
 
 	global $globconn;
