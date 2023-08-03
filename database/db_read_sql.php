@@ -9,19 +9,20 @@ function test123(){
 }
 
 
-function readSQLDBfromQuery($inputQuery,$decodeOutput = false){
+function readSQLDBfromQuery($inputQuery,$decodeOutput = false,$skipResult = false){
 
 	global $globconn;
 	$outArray = array();
     $sql = $inputQuery;
 
-  
+      
 	if ($globconn->connect_error) {
 		die("Connection failed: " . $globconn->connect_error);
 	}
 	
 	$result = $globconn->query($sql);
 
+    if ($skipResult){return;}
 
 	if ($result->num_rows > 0) {
 		while($response = $result->fetch_assoc()) {	
