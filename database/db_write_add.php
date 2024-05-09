@@ -12,7 +12,7 @@ function addSQLDBentry(){
 
     $sql = "INSERT INTO #######################
     (id,name,notes,feed,tags)
-    VALUES (\"" . $nextID . "\",\"" . ($call->notes) . "\",\"" . ($call->feed) . "\",\"" . ($call->tags) . "\")";
+    VALUES ('$nextID','$call->notes','$call->feed','$call->tags')";
 
     $result = $globconn->query($sql);
 
