@@ -6,6 +6,8 @@ function checkOPSconnection(){
 
 	$ch = curl_init();
 
+// CURLOPT_RETURNTRANSFER will send the value or not directly without an echp
+
 	curl_setopt_array($ch, [
 		CURLOPT_URL => "https://{DOMAIN}.atlassian.net/rest/api/2/project/OPS",
 		CURLOPT_HEADER => false,
